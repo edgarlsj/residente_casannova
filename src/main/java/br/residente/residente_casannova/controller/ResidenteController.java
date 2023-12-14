@@ -4,11 +4,7 @@ import br.residente.residente_casannova.entities.Residente;
 import br.residente.residente_casannova.service.ResidenteService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +34,11 @@ public class ResidenteController {
             return ResponseEntity.notFound().build();//Se o residente não for encontrado, retorna uma resposta HTTP 404 (Not Found).
         }
 
-
+        }
+    @PostMapping//Este método do controlador (adicionarResidente) é responsável por lidar com solicitações HTTP POST para adicionar um novo residente.
+    public ResponseEntity<Residente> adicionarResidente (@RequestBody Residente residente){
+        Residente novoResidente = residenteService.saveResidente(residente);
+        return ResponseEntity.ok(novoResidente);
 
     }
 
